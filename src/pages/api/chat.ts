@@ -1,6 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
+type ChatMessage = {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+};
+
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
@@ -18,7 +23,7 @@ export default async function handler(
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: messages.map((msg: any) => ({
+      messages: messages.map((msg: ChatMessage) => ({
         role: msg.role,
         content: msg.content,
       })),
