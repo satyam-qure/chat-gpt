@@ -47,38 +47,44 @@ const HeroSection = () => {
   const descriptionText = "Discover amazing features and possibilities";
   
   return (
-    <div className="flex h-[500px] items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600">
-      <div className="text-center text-white">
+    <div className="flex min-h-[500px] md:min-h-[600px] items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-12 md:py-20">
+      <div className="text-center text-white max-w-4xl mx-auto">
         <motion.h1
-          className="text-6xl font-bold mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6"
           variants={sentence}
           initial="hidden"
           animate="visible"
         >
           {welcomeText.split("").map((char, index) => (
-            <motion.span key={index} variants={letter}>
+            <motion.span key={index} variants={letter} className="inline-block">
               {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}
         </motion.h1>
         <motion.p
-          className="text-xl mb-8"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8"
           variants={sentence}
           initial="hidden"
           animate="visible"
           transition={{ delay: 1.5 }}
         >
           {descriptionText.split("").map((char, index) => (
-            <motion.span key={index} variants={letter}>
+            <motion.span key={index} variants={letter} className="inline-block">
               {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}
         </motion.p>
-        <p
-          className="text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors"
-        >
-          Total number of queries: {queryCount}
-        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+          <p className="text-white text-sm sm:text-base md:text-lg font-semibold bg-white/10 px-6 py-2 rounded-full backdrop-blur-sm">
+            Total number of queries: {queryCount}
+          </p>
+          <button 
+            onClick={() => window.location.href = '/dashboard'}
+            className="bg-white text-blue-600 hover:bg-blue-50 transition-colors text-sm sm:text-base md:text-lg font-semibold px-6 py-2 rounded-full"
+          >
+            Get Started
+          </button>
+        </div>
       </div>
     </div>
   )
